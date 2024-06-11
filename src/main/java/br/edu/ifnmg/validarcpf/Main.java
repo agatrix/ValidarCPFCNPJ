@@ -6,6 +6,7 @@ package br.edu.ifnmg.validarcpf;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
+        System.out.println(ValidarCpf.obterDigito(14230703058L,3));
     }
 }
