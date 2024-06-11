@@ -20,5 +20,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        
+        System.out.println(ValidarCPFCNPJ.isCNPJValido(45541740000173L));
     }
 }

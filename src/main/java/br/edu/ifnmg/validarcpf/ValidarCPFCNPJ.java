@@ -7,7 +7,8 @@ package br.edu.ifnmg.validarcpf;
 public class ValidarCPFCNPJ {
     long cpf_long;
     String cpf_String;
-    
+    long cnpj_long;
+    String cnpj_String;
     //<editor-fold defaultstate="collapsed" desc="Set e Get CPF">
     
     public double getCpf_long() {
@@ -107,10 +108,38 @@ public class ValidarCPFCNPJ {
      */
     static boolean isCPFValido(String cpf){
         cpf = cpf.replace(".", "").replace("-", "");
-        if(ValidarCPFCNPJ.isCPFValido(Long.parseLong(cpf))){
-            return true;
+        
+        return ValidarCPFCNPJ.isCPFValido(Long.parseLong(cpf));
+    }
+    
+    static boolean isCNPJValido(long cnpj){
+        int digitos = ValidarCPFCNPJ.contagemDigito(cnpj);
+        int vetor[] = {6,5,4,3,2,9,8,7,6,5,4,3,2};
+        int soma = 0;
+
+        if(digitos>14)
+            return false;
+        
+        for(int i = digitos; i > 2; i--){
+
+            soma += (ValidarCPFCNPJ.obterDigito(cnpj, i)*vetor[15-i]);
         }
-        return false;
+
+        if(11-(soma%11)==10)
+            soma = 0;
+        
+        if((11-(soma%11))!= ValidarCPFCNPJ.obterDigito(cnpj, 2))
+            return false;
+        
+        soma = 0;
+         for(int i = digitos; i > 1; i--)
+            soma += (ValidarCPFCNPJ.obterDigito(cnpj, i)*vetor[14-i]);
+        
+        
+        if(11-(soma%11)==10)
+            soma = 0;
+
+        return (11-(soma%11)) == ValidarCPFCNPJ.obterDigito(cnpj, 1);
     }
 
 }
