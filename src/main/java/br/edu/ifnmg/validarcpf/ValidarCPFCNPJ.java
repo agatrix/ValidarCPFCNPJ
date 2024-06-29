@@ -33,6 +33,30 @@ public class ValidarCPFCNPJ {
         this.cpf_String = cpf_String;
     }
     //</editor-fold>
+
+    public long getCnpj_long() {
+        return cnpj_long;
+    }
+
+    public void setCnpj_long(long cnpj_long)throws Exception {
+        if(!ValidarCPFCNPJ.isCNPJValido(cnpj_long)){
+            throw new Exception("Invalido");
+        }
+        
+        this.cnpj_long = cnpj_long;
+    }
+
+    public String getCnpj_String() {
+        return cnpj_String;
+    }
+
+    public void setCnpj_String(String cnpj_String) throws Exception{
+        if(!ValidarCPFCNPJ.isCNPJValido(cnpj_String)){
+            throw new Exception("Invalido");
+        }
+        
+        this.cnpj_String = cnpj_String;
+    }
     
     
     
@@ -141,5 +165,9 @@ public class ValidarCPFCNPJ {
 
         return (11-(soma%11)) == ValidarCPFCNPJ.obterDigito(cnpj, 1);
     }
-
+    
+    static boolean isCNPJValido(String cnpj){
+        cnpj = cnpj.replace(".", "").replace("-", "").replace("/","");
+        return ValidarCPFCNPJ.isCNPJValido(Long.parseLong(cnpj));
+    }
 }

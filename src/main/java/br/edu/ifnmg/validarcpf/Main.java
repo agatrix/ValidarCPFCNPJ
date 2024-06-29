@@ -6,21 +6,35 @@ package br.edu.ifnmg.validarcpf;
  */
 public class Main {
     public static void main(String[] args) {
-        ValidarCPFCNPJ cpf = new ValidarCPFCNPJ();
+        ValidarCPFCNPJ objeto = new ValidarCPFCNPJ();
         try {
-            cpf.setCpf_long(456789014L);
+            objeto.setCpf_long(456789014L);
             System.out.println("Valido");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         try {
-            cpf.setCpf_String("002.307.030-58");
+            objeto.setCpf_String("002.307.030-58");
             System.out.println("Valido");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         
-        System.out.println(ValidarCPFCNPJ.isCNPJValido(45541740000173L));
+        try {
+            objeto.setCnpj_long(35017120000186L);
+            System.out.println("Valido");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        try {
+            objeto.setCnpj_String("35.017.120/0001-86");
+            System.out.println("Valido");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        
     }
 }
