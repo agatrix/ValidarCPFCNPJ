@@ -5,10 +5,10 @@ package br.edu.ifnmg.validarcpf;
  * @author Gustavo
  */
 public class ValidarCPFCNPJ {
-    long cpf_long;
-    String cpf_String;
-    long cnpj_long;
-    String cnpj_String;
+    private long cpf_long;
+    private String cpf_String;
+    private long cnpj_long;
+    private String cnpj_String;
     //<editor-fold defaultstate="collapsed" desc="Set e Get CPF">
     
     public double getCpf_long() {
@@ -34,6 +34,7 @@ public class ValidarCPFCNPJ {
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Set e Get CNPJ">
     public long getCnpj_long() {
         return cnpj_long;
     }
@@ -57,7 +58,7 @@ public class ValidarCPFCNPJ {
         
         this.cnpj_String = cnpj_String;
     }
-    
+    //</editor-fold>
     
     
     /**
@@ -66,7 +67,7 @@ public class ValidarCPFCNPJ {
      * @param pos
      * @return int
      */
-    static int obterDigito(Long cpf, int pos){
+    private static int obterDigito(Long cpf, int pos){
         int div = 10; int mod = 10;
         Double digito = (cpf.doubleValue()
                         %(Math.pow(mod, pos))
@@ -83,7 +84,7 @@ public class ValidarCPFCNPJ {
     * @param cpf
     * @return int
     */
-    static int contagemDigito(Long cpf){
+    private static int contagemDigito(Long cpf){
         int contador = 0;
         while(cpf >= 1){
             cpf /= 10;
@@ -98,7 +99,7 @@ public class ValidarCPFCNPJ {
      * @param cpf
      * @return bool
      */
-    static boolean isCPFValido(long cpf){
+    public static boolean isCPFValido(long cpf){
         int digitos = ValidarCPFCNPJ.contagemDigito(cpf);
         int soma = 0;
         
@@ -130,13 +131,13 @@ public class ValidarCPFCNPJ {
      * @param cpf
      * @return 
      */
-    static boolean isCPFValido(String cpf){
+    public static boolean isCPFValido(String cpf){
         cpf = cpf.replace(".", "").replace("-", "");
         
         return ValidarCPFCNPJ.isCPFValido(Long.parseLong(cpf));
     }
     
-    static boolean isCNPJValido(long cnpj){
+    public static boolean isCNPJValido(long cnpj){
         int digitos = ValidarCPFCNPJ.contagemDigito(cnpj);
         int vetor[] = {6,5,4,3,2,9,8,7,6,5,4,3,2};
         int soma = 0;
@@ -166,7 +167,7 @@ public class ValidarCPFCNPJ {
         return (11-(soma%11)) == ValidarCPFCNPJ.obterDigito(cnpj, 1);
     }
     
-    static boolean isCNPJValido(String cnpj){
+    public static boolean isCNPJValido(String cnpj){
         cnpj = cnpj.replace(".", "").replace("-", "").replace("/","");
         return ValidarCPFCNPJ.isCNPJValido(Long.parseLong(cnpj));
     }
